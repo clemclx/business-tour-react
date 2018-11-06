@@ -4,9 +4,9 @@
       <div class="news">
         <h1>test</h1>
       </div>
-      <div class="players d-block p-2 bg-dark text-white">
+      <!-- <div class="players d-block p-2 bg-dark text-white">
         <h4>Players:</h4>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
