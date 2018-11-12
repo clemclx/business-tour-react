@@ -1,36 +1,63 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from '@/components/Index'
+import Login from '@/components/Login'
+import Signup from '@/components/Signup'
+import Play from '@/components/Play'
+import Profile from '@/components/Profile'
+import Stats from '@/components/Stats'
+import Faq from '@/components/Faq'
+import Cgu from '@/components/Cgu'
+import Rules from '@/components/Rules'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/', component: () => import('../components/Index.vue')
-    },
-    {
-      path: '/login', component: () => import('../components/Login.vue')
-    },
-    {
-      path: '/signup', component: () => import('../components/Signup.vue')
-    },
-    {
-      path: '/play', component: () => import('../components/Play.vue')
-    },
-    {
-      path: '/profile', component: () => import('../components/Profile.vue')
-    },
-    {
-      path: '/stats', component: () => import('../components/Stats.vue')
-    },
-    {
-      path: '/faq', component: () => import('../components/Faq.vue')
-    },
-    {
-      path: '/cgu', component: () => import('../components/Cgu.vue')
-    },
-    {
-      path: '/rules', component: () => import('../components/Rules.vue')
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'Index',
+            component: Index
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/signup',
+            name: 'Signup',
+            component: Signup
+        },
+        {
+            path: '/play',
+            name: 'Play',
+            component: Play
+        },
+        {
+            path: '/profile',
+            name: 'Profile',
+            component: Profile
+        },
+        {
+            path: '/stats',
+            name: 'Stats',
+            component: Stats
+        },
+        {
+            path: '/faq',
+            name: 'Faq',
+            component: Faq
+        },
+        {
+            path: '/cgu',
+            name: 'Cgu',
+            component: Cgu
+        },
+        {
+            path: '/rules',
+            name: 'Rules',
+            component: Rules
+        },
+    ]
 })
