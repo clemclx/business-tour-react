@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <form class="form-signin">
+    <form @submit="login" class="form-signin">
       <h2 class="form-signin-heading">Authentification</h2>
-      <input type="text" class="form-control" name="username" placeholder="Adresse email" required="" autofocus="" />
-      <input type="password" class="form-control" name="password" placeholder="Mot de passe" required=""/>
+      <input type="text" class="form-control" name="username" placeholder="Adresse email" required="" autofocus="" v-model="emailAddress"/>
+      <input type="password" class="form-control" name="password" placeholder="Mot de passe" required="" v-model="password"/>
       <label class="checkbox">
-        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Mémoriser
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" v-model="rememberMe"> Mémoriser
       </label>
       <button class="btn btn-lg btn-primary btn-block" type="submit">S'authentifier</button>
     </form>
@@ -13,12 +13,40 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import {globalVue} from "../main";
+
 export default {
-  name: 'Login',
   data () {
     return {
-      msg: 'Login'
+      emailAddress: '',
+      password: '',
+      rememberMe: false
     }
+  },
+  methods: {
+     login(e) {
+         e.preventDefault();
+         fetch('http://192.168.99.100:1337/api/v1/entrance/login', {
+             method: 'PUT',
+             headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({emailAddress: this.emailAddress, password: this.password, rememberMe: this.rememberMe})
+         }).then((response) => {
+             if (response.status === 200) {
+                 return response.json();
+             }
+         }).then((data) => {
+             globalVue.loggedUser.userId = data.userId
+             globalVue.loggedUser.emailAddress = data.emailAddress
+             globalVue.loggedUser.fullName = data.fullName
+             this.$router.push('/')
+         }).catch((e) => {
+             console.log(e);
+         })
+     }
   }
 }
 </script>

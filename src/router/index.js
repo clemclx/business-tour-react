@@ -10,8 +10,6 @@ import Faq from '@/components/Faq'
 import Cgu from '@/components/Cgu'
 import Rules from '@/components/Rules'
 
-Vue.use(Router)
-
 export default new Router({
     mode: 'history',
     routes: [

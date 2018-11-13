@@ -8,3 +8,8 @@ services:
     ports:
     - "8080:8080"
     - "8000:8000"
+    networks:
+      - nodeapi
+networks:
+  nodeapi:
+    driver: bridge
