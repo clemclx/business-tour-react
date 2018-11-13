@@ -6,27 +6,43 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueSession from 'vue-session'
 import VueRouter from 'vue-router'
-import Vuex from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import {store} from "./store/session";
 
 Vue.use(BootstrapVue)
 Vue.use(VueSession)
 Vue.use(VueRouter)
-Vue.use(Vuex)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-export var globalVue = new Vue({
+new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>',
-  data: {
-    loggedUser: {
-      userId: '',
-      emailAddress: '',
-      fullName: ''
-    }
+  store: store,
+  methods: {
+      checkSessionUser: function() {
+          fetch('http://192.168.99.100:1337/api/v1/account/overview', {
+              method: 'GET',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              credentials: 'include'
+          }).then((response) => {
+              return response.json()
+          }).then((data) => {
+              this.$store.state.userId = data.id
+              this.$store.state.emailAddress = data.emailAddress
+              this.$store.state.fullName = data.fullName
+          }).catch((e) => {
+              console.log(e)
+          })
+      }
+  },
+  beforeMount() {
+    this.checkSessionUser()
   }
 })

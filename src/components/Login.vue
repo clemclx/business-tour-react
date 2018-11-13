@@ -14,7 +14,6 @@
 
 <script>
 import Vue from 'vue'
-import {globalVue} from "../main";
 
 export default {
   data () {
@@ -33,15 +32,16 @@ export default {
                  'Accept': 'application/json',
                  'Content-Type': 'application/json'
              },
+             credentials: 'include',
              body: JSON.stringify({emailAddress: this.emailAddress, password: this.password, rememberMe: this.rememberMe})
          }).then((response) => {
              if (response.status === 200) {
                  return response.json();
              }
          }).then((data) => {
-             globalVue.loggedUser.userId = data.userId
-             globalVue.loggedUser.emailAddress = data.emailAddress
-             globalVue.loggedUser.fullName = data.fullName
+             this.$store.state.userId = data.id
+             this.$store.state.emailAddress = data.emailAddress
+             this.$store.state.fullName = data.fullName
              this.$router.push('/')
          }).catch((e) => {
              console.log(e);

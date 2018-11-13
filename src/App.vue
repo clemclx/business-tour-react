@@ -20,12 +20,20 @@
             <router-link to="/rules" tag="a" class="nav-link">Règles</router-link>
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" v-if="!userId">
           <li class="nav-item active my-2 my-sm-0">
             <router-link to="/login" tag="a" class="nav-link">Connexion</router-link>
           </li>
           <li class="nav-item active my-2 my-sm-0">
             <router-link to="/signup" tag="a" class="nav-link">Inscription</router-link>
+          </li>
+        </ul>
+        <ul class="navbar-nav" v-if="userId">
+          <li class="nav-item active my-2 my-sm-0">
+            <a class="nav-link">{{fullName}}</a>
+          </li>
+          <li class="nav-item active my-2 my-sm-0">
+            <router-link to="/logout" tag="a" class="nav-link">Deconnexion</router-link>
           </li>
         </ul>
       </div>
@@ -36,23 +44,25 @@
       <!-- Copyright -->
       <div class="footer-copyright text-center py-3">© 2018 Copyright:
         <a href="https://mdbootstrap.com/education/bootstrap/"> business-tour</a>
-        test: {{globalVue.loggedUser.fullName}}
       </div>
       <!-- Copyright -->
-
     </footer>
   </div>
 </template>
 
 <script>
-    import Vue from 'vue'
-    import {globalVue} from "./main";
 
     export default {
         name: 'App',
-        data: function() {
-            return {
-                fullName: ''
+        computed: {
+            fullName: function() {
+                return this.$store.state.fullName
+            },
+            userId: function() {
+                return this.$store.state.userId
+            },
+            emailAddress: function () {
+                return this.$store.state.emailAddress
             }
         }
     }
