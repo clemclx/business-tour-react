@@ -79,8 +79,12 @@
     </form>
     <!-- Confirme change -->
     <div class="row text-center">
-      <button type="button" class="btn btn-default">Sauvegarder</button>
-      <button type="button" class="btn btn-default">Reset Passsword</button>
+      <div class="col-4"></div>
+      <div class="col-4">
+        <button type="button" class="btn btn-default">Sauvegarder</button>
+        <button type="button" class="btn btn-default">Reset Passsword</button>
+      </div>
+      <div class="col-4"></div>
     </div>
   </div>
 </div>
