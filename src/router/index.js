@@ -9,6 +9,8 @@ import Stats from '@/components/Stats'
 import Faq from '@/components/Faq'
 import Cgu from '@/components/Cgu'
 import Rules from '@/components/Rules'
+import Lobby from '@/components/Lobby'
+import Waiting from '@/components/Waiting'
 
 export default new Router({
     mode: 'history',
@@ -32,6 +34,16 @@ export default new Router({
             path: '/play',
             name: 'Play',
             component: Play
+        },
+        {
+            path: '/lobby',
+            name: 'Lobby',
+            component: Lobby
+        },
+        {
+            path: '/waiting',
+            name:'Waiting',
+            component: Waiting
         },
         {
             path: '/profile',

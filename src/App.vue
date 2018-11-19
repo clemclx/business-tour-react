@@ -39,14 +39,6 @@
       </div>
     </nav>
     <router-view/>
-    <footer class="page-footer font-small blue">
-
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2018 Copyright:
-        <a href="https://mdbootstrap.com/education/bootstrap/"> business-tour</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
   </div>
 </template>
 
@@ -75,19 +67,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    min-height: 100vh;
   }
   html {
     position: relative;
   }
   nav {
     height: 60px;
-  }
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
   }
 </style>
