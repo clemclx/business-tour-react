@@ -33,7 +33,7 @@
             <a class="nav-link">{{fullName}}</a>
           </li>
           <li class="nav-item active my-2 my-sm-0">
-            <router-link to="/logout" tag="a" class="nav-link">Deconnexion</router-link>
+            <a class="nav-link" @click="handleLogout">Déconnexion</a>
           </li>
         </ul>
       </div>

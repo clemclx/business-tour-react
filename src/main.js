@@ -22,8 +22,7 @@ new Vue({
     el: '#app',
     components: {App},
     template: '<App/>',
-    methods: {
-        checkSessionUser: function () {
+    beforeCreate() {
             fetch('http://192.168.99.100:1337/api/v1/account/overview', {
                 method: 'GET',
                 headers: {
@@ -38,11 +37,7 @@ new Vue({
                 this.$store.dispatch('changeFullName', data.pseudo);
                 this.$store.dispatch('changeEmailAddress', data.emailAddress);
             }).catch((e) => {
-                console.log(e)
+
             })
         }
-    },
-    beforeMount() {
-        this.checkSessionUser()
-    }
 })

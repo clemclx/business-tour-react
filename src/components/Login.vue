@@ -29,7 +29,7 @@ export default {
   methods: {
      login(e) {
          e.preventDefault();
-         fetch('http://localhost:1337/api/v1/entrance/login', {
+         fetch('http://192.168.99.100:1337/api/v1/entrance/login', {
              method: 'PUT',
              headers: {
                  'Accept': 'application/json',

@@ -86,14 +86,23 @@ export default router
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        if(store.getters.userId == null) {
+        fetch('http://192.168.99.100:1337/api/v1/account/overview', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            next()
+        }).catch((e) => {
             next({
                 path: '/login',
                 query: {redirect: to.fullPath}
             })
-        } else {
-            next()
-        }
+        })
     } else {
         next()
     }
