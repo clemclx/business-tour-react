@@ -17,32 +17,32 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>',
-  store: store,
-  methods: {
-      checkSessionUser: function() {
-          fetch('http://localhost:1337/api/v1/account/overview', {
-              method: 'GET',
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              credentials: 'include'
-          }).then((response) => {
-              return response.json()
-          }).then((data) => {
-              this.$store.state.userId = data.id
-              this.$store.state.emailAddress = data.emailAddress
-              this.$store.state.fullName = data.fullName
-          }).catch((e) => {
-              console.log(e)
-          })
-      }
-  },
-  beforeMount() {
-    this.checkSessionUser()
-  }
+    router,
+    store,
+    el: '#app',
+    components: {App},
+    template: '<App/>',
+    methods: {
+        checkSessionUser: function () {
+            fetch('http://192.168.99.100:1337/api/v1/account/overview', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            }).then((response) => {
+                return response.json()
+            }).then((data) => {
+                this.$store.dispatch('changeUserId', data.id);
+                this.$store.dispatch('changeFullName', data.pseudo);
+                this.$store.dispatch('changeEmailAddress', data.emailAddress);
+            }).catch((e) => {
+                console.log(e)
+            })
+        }
+    },
+    beforeMount() {
+        this.checkSessionUser()
+    }
 })

@@ -9,10 +9,9 @@ import Stats from '@/components/Stats'
 import Faq from '@/components/Faq'
 import Cgu from '@/components/Cgu'
 import Rules from '@/components/Rules'
-import Lobby from '@/components/Lobby'
-import Waiting from '@/components/Waiting'
+import {store} from "../store/session"
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [
         {
@@ -33,42 +32,55 @@ export default new Router({
         {
             path: '/play',
             name: 'Play',
-            component: Play
-        },
-        {
-            path: '/lobby',
-            name: 'Lobby',
-            component: Lobby
-        },
-        {
-            path: '/waiting',
-            name:'Waiting',
-            component: Waiting
+            component: Play,
+            meta: {requiresAuth: true}
         },
         {
             path: '/profile',
             name: 'Profile',
-            component: Profile
+            component: Profile,
+            meta: {requiresAuth: true}
         },
         {
             path: '/stats',
             name: 'Stats',
-            component: Stats
+            component: Stats,
+            meta: {requiresAuth: true}
         },
         {
             path: '/faq',
             name: 'Faq',
-            component: Faq
+            component: Faq,
+            meta: {requiresAuth: true}
         },
         {
             path: '/cgu',
             name: 'Cgu',
-            component: Cgu
+            component: Cgu,
+            meta: {requiresAuth: true}
         },
         {
             path: '/rules',
             name: 'Rules',
-            component: Rules
+            component: Rules,
+            meta: {requiresAuth: true}
         },
     ]
+})
+
+export default router
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if(store.getters.userId == null) {
+            next({
+                path: '/login',
+                query: {redirect: to.fullPath}
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 })
