@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <router-link to="/play" tag="a" class="nav-link">Jouer</router-link>
+            <router-link to="/lobby" tag="a" class="nav-link">Jouer</router-link>
           </li>
           <li class="nav-item active">
             <router-link to="/profile" tag="a" class="nav-link">Profile</router-link>
