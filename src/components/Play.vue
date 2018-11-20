@@ -53,7 +53,7 @@
         data: function () {
             return {
                 name: 'test',
-                price: '20000$',
+                price: '20K',
             }
         },
         template: '<div class="single-case"><div class="title">{{name}}</div><div class="price">{{price}}</div></div>'
@@ -71,7 +71,7 @@
         template: '<div class="dices">' +
             '<img src="../../static/die-1.svg" alt="Smiley face" height="42" width="42" class="de1">' +
             '<img src="../../static/die-1.svg" alt="Smiley face" height="42" width="42" class="de2">' +
-            '<button class="btn btn-light">Lancer le dé</button>' +
+            '<button class="btn btn-light">Lancer</button>' +
             '</div>'
     });
     export default {}
@@ -79,11 +79,14 @@
 
 <style scoped>
     .table {
-        background-color: rebeccapurple;
-        width: 1000px;
-        height: 1000px;
+        background-image: url("../../static/bg-table.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
         margin-left: auto;
         margin-right: auto;
+        position: absolute;
+        margin-bottom: 0 !important;
     }
 
     .board {
@@ -91,17 +94,34 @@
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-blend-mode: darken;
         position: relative;
         width: 1000px;
         height: 1000px;
+        box-shadow: 0 0 32px 2px rgba(0,0,0,0.71);
+        margin: 50px auto;
     }
 
     .single-case {
         border: 1px solid grey;
         background-color: white;
+        width: 100px;
+        height: 150px;
+        box-shadow: 0px -5px 7px -3px rgba(0,0,0,0.75);
     }
-
+    .single-case >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 75%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .single-case >>> .price {
+        font-weight: 700;
+        font-size: 1.5em;
+        color: black;
+        background-image: url("../../static/beton.jpg");
+    }
     .row-bottom, .row-top, .col-left, .col-right {
         display: flex;
         width: 100%;
@@ -119,11 +139,6 @@
     .row-bottom {
         position: absolute;
         bottom: 0;
-    }
-
-    .single-case {
-        width: 100px;
-        height: 150px;
     }
 
     .col-left {
@@ -169,10 +184,15 @@
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         z-index: 20;
+        background-color: rgba(0,0,0,0.8);
+        padding: 15px;
+        border-radius: 5px;
     }
     .dices >>> .btn {
         display: block;
         margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .dices >>> .de1 {
         margin-left: 5px;

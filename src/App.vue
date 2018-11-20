@@ -81,6 +81,10 @@
 </script>
 
 <style>
+    @font-face {
+      font-family: Allerta Stencil;
+      src: url(https://fonts.googleapis.com/css?family=Allerta+Stencil);
+    }
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
