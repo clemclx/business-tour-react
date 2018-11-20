@@ -9,6 +9,8 @@ import Stats from '@/components/Stats'
 import Faq from '@/components/Faq'
 import Cgu from '@/components/Cgu'
 import Rules from '@/components/Rules'
+import Lobby from '@/components/Lobby'
+import Waiting from '@/components/Waiting'
 import {store} from "../store/session"
 
 const router = new Router({
@@ -33,6 +35,18 @@ const router = new Router({
             path: '/play',
             name: 'Play',
             component: Play,
+            meta: {requiresAuth: true}
+        },
+        {
+            path: '/lobby',
+            name: 'Lobby',
+            component: Lobby,
+            meta: {requiresAuth: true}
+        },
+        {
+            path: '/waiting',
+            name: 'Waiting',
+            component: Waiting,
             meta: {requiresAuth: true}
         },
         {

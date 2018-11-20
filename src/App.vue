@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <router-link to="/" tag="a" class="navbar-brand">Business Tour</router-link>
@@ -41,58 +40,6 @@
     </nav>
     <router-view/>
   </div>
-=======
-    <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <router-link to="/" tag="a" class="navbar-brand">Business Tour</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active" v-if="userId">
-                        <router-link to="/play" tag="a" class="nav-link">Jouer</router-link>
-                    </li>
-                    <li class="nav-item active" v-if="userId">
-                        <router-link to="/profile" tag="a" class="nav-link">Profile</router-link>
-                    </li>
-                    <li class="nav-item active" v-if="userId">
-                        <router-link to="/stats" tag="a" class="nav-link">Stats</router-link>
-                    </li>
-                    <li class="nav-item active" v-if="userId">
-                        <router-link to="/rules" tag="a" class="nav-link">Règles</router-link>
-                    </li>
-                </ul>
-                <ul class="navbar-nav" v-if="!userId">
-                    <li class="nav-item active my-2 my-sm-0">
-                        <router-link to="/login" tag="a" class="nav-link">Connexion</router-link>
-                    </li>
-                    <li class="nav-item active my-2 my-sm-0">
-                        <router-link to="/signup" tag="a" class="nav-link">Inscription</router-link>
-                    </li>
-                </ul>
-                <ul class="navbar-nav" v-if="userId">
-                    <li class="nav-item active my-2 my-sm-0">
-                        <a class="nav-link">{{fullName}}</a>
-                    </li>
-                    <li class="nav-item active my-2 my-sm-0">
-                        <a class="nav-link" @click="handleLogout">Déconnexion</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <router-view/>
-        <footer class="page-footer font-small blue">
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> business-tour</a>
-            </div>
-            <!-- Copyright -->
-        </footer>
-    </div>
->>>>>>> b147d2ea023ff2145bdb5872a6cd091efbc74b4b
 </template>
 
 <script>
