@@ -2,7 +2,7 @@
   <div class="wrapper">
     <form @submit="login" class="form-signin">
       <h2 class="form-signin-heading">Authentification</h2>
-      <input type="text" class="form-control" name="username" placeholder="Adresse email" required="" autofocus="" v-model="emailAddress"/>
+      <input type="text" class="form-control" name="email" placeholder="Adresse email" required="" autofocus="" v-model="emailAddress"/>
       <input type="password" class="form-control" name="password" placeholder="Mot de passe" required="" v-model="password"/>
       <label class="checkbox">
         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" v-model="rememberMe"> Mémoriser
@@ -18,6 +18,9 @@ import Vue from 'vue'
 export default {
   data () {
     return {
+      firstname: '',
+      lastname: '',
+      pseudo: '',
       emailAddress: '',
       password: '',
       rememberMe: false
@@ -33,15 +36,15 @@ export default {
                  'Content-Type': 'application/json'
              },
              credentials: 'include',
-             body: JSON.stringify({emailAddress: this.emailAddress, password: this.password, rememberMe: this.rememberMe})
+             body: JSON.stringify({firstname: this.firstname, lastname: this.lastname, pseudo: this.pseudo, emailAddress: this.emailAddress, password: this.password, rememberMe: this.rememberMe})
          }).then((response) => {
              if (response.status === 200) {
                  return response.json();
              }
          }).then((data) => {
-             this.$store.state.userId = data.id
-             this.$store.state.emailAddress = data.emailAddress
-             this.$store.state.fullName = data.fullName
+             this.$store.dispatch('changeUserId', data.id)
+             this.$store.dispatch('changeFullName', data.pseudo)
+             this.$store.dispatch('changeEmailAddress', data.emailAddress)
              this.$router.push('/')
          }).catch((e) => {
              console.log(e);

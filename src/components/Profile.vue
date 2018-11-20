@@ -92,9 +92,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
-  }
+  name: 'HelloWorld'
 }
 </script>
 <style scoped>

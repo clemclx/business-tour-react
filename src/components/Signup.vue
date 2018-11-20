@@ -17,7 +17,9 @@
         <!--end modal signup success-->
         <form @submit="signup" class="form-signin" id="signup-form">
             <h2 class="form-signin-heading">Inscription</h2>
-            <input type="text" class="form-control" name="fullName" placeholder="Nom" required="" autofocus="" v-model="fullName"/>
+            <input type="text" class="form-control" name="firstname" placeholder="Prénom" required="" autofocus="" v-model="firstname"/>
+            <input type="text" class="form-control" name="lastname" placeholder="Nom" required="" autofocus="" v-model="lastname"/>
+            <input type="text" class="form-control" name="pseudo" placeholder="Pseudo" required="" autofocus="" v-model="pseudo"/>
             <input type="text" class="form-control" name="emailAddress" placeholder="Adresse email" required="" autofocus="" v-model="emailAddress"/>
             <input type="password" class="form-control" name="password" placeholder="Mot de passe" required="" v-model="password"/>
             <button class="btn btn-lg btn-primary btn-block btn-signup" type="submit">S'inscrire</button>
@@ -32,7 +34,9 @@
     export default {
         data() {
             return {
-                fullName: '',
+                firstname: '',
+                lastname: '',
+                pseudo: '',
                 emailAddress: '',
                 password: '',
                 isSign: false
@@ -47,7 +51,7 @@
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({emailAddress: this.emailAddress, password: this.password, fullName: this.fullName})
+                    body: JSON.stringify({firstname: this.firstname, lastname: this.lastname, pseudo: this.pseudo, emailAddress: this.emailAddress, password: this.password})
                 }).then((response) => {
                     this.isSign = true;
                 }).catch((e) => {
