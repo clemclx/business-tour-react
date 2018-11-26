@@ -13,9 +13,7 @@
             <th scope="col"><button class="btn btn-light" v-on:click="createSessions">Créer une partie</button></th>
           </tr>
         </thead>
-        <tbody>
-          <singleSession></singleSession>
-        </tbody>
+        <singleSession></singleSession>
       </table>
     </div>
     <div class="col-2">
@@ -26,16 +24,62 @@
 
 <script>
 import Vue from 'vue';
+import instanciateSocket from '../socket/socket';
 
 Vue.component('singleSession', {
   data: function () {
   return {
     id: '',
     name: '',
-    nplayer: ''
+    nplayer: '',
+    sessions: '',
   }
 },
-template: '<tr><th scope="row">{{id}}</th><td name="pseudo">{{name}}</td><td name="numberOfCurrrentPlayers">{{nplayer}}/4</td><td><router-link to="/waiting/" tag="button" class="btn btn-light"">Rejoindre</router-link></td></tr>'
+methods: {
+  getSessions(){
+      fetch('http://localhost:1337/lobby', {
+        method: 'GET',
+        headers : {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      }).then((data) => {
+        this.sessions = JSON.parse(data);
+      })
+    },
+    joinSession(id){
+      fetch('http://localhost:1337/lobby/join', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        data = JSON.parse(data)
+
+        let io = instanciateSocket();
+
+        io.socket.post('/socket/join', {gameId: data.idOfTheCurrentGame}, function(data, jwr) {
+          console.log('Server response: ' + jwr + data)
+        })
+
+        this.$store.dispatch('changeGameId', data.idOfTheCurrentGame);
+        this.$router.push('/waiting')
+      })
+    }
+},
+beforeMount() {
+    this.getSessions();
+},
+template: '<tbody><tr v-for="session in sessions"><th>{{session.id}}</th><th>Game {{session.id}}</th><th>{{session.numberOfCurrentPlayers}} / 4</th><th><button class="btn btn-light" @click="joinSession(session.id)">Rejoindre</button></th></tr></tbody>'
 });
 
 export default {
@@ -60,33 +104,19 @@ export default {
           }
         }).then((data) => {
           data = JSON.parse(data)
-          this.$router.push('/waiting/' + data.id)
+
+          let io = instanciateSocket();
+
+          io.socket.post('/socket/test', {gameId: data.id}, function(data, jwr) {
+            console.log('Server response: ' + jwr + data)
+          })
+
+          this.$store.dispatch('changeGameId', data.id);
+          this.$router.push('/waiting')
         }).catch((e) => {
           console.log(e);
         })
-    },
-    joinSession(e){
-      e.preventDefault();
-      fetch('http://localhost:1337/lobby/join', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({numberOfCurrentPlayers: '1'})
-        }).then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          }
-        }).then((data) => {
-          console.log(data)
-          this.$router.push('/waiting/' + data)
-        }).catch((e) => {
-          console.log(e);
-        })
-    },
-    
+    }
   }
 }
 </script>

@@ -1,15 +1,29 @@
 <template>
-<ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
+<div class="cntnr">
+  <h1>En attente</h1>
+  <div>Game id : {{gameId}}</div>
+  <div>Joueurs : {{playerNb}} / 4</div>
+</div>
 </template>
 
 <script>
+import socketIOClient from 'socket.io-client';
+import sailsIOClient from 'sails.io.js';
 export default {
+  data: function() {
+    return {
+      gameId: this.$store.getters.gameId,
+      playerNb: 1
+    }
+  },
+  mounted() {
+    if (io.sails) {
+      console.log(io.sails)
+      io.sails.on('refreshPlayer', function(data) {
+      playerNb = data.playerNb
+    })
+    }
+  }
 }
 </script>
 <style scoped>

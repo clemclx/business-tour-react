@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
     state: {
         userId: null,
         fullName: '',
-        emailAddress: ''
+        emailAddress: '',
+        gameId: null
     },
 
     getters: {
@@ -19,6 +20,9 @@ export const store = new Vuex.Store({
         },
         emailAddress: state => {
             return state.emailAddress
+        },
+        gameId: state => {
+            return state.gameId
         }
     },
 
@@ -31,6 +35,9 @@ export const store = new Vuex.Store({
         },
         changeEmailAddress (state, payload) {
             state.emailAddress = payload
+        },
+        changeGameId (state, payload) {
+            state.gameId = payload
         }
     },
 
@@ -43,6 +50,9 @@ export const store = new Vuex.Store({
         },
         changeEmailAddress(context, payload) {
             context.commit('changeEmailAddress', payload)
+        },
+        changeGameId(context, payload) {
+            context.commit('changeGameId', payload)
         }
     }
 })
