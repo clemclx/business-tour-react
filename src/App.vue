@@ -59,7 +59,7 @@
         },
         methods: {
             handleLogout: function () {
-                fetch('http://192.168.99.100:1337/api/v1/account/logout', {
+                fetch('http://localhost:1337/api/v1/account/logout', {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

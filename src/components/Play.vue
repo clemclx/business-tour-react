@@ -48,7 +48,7 @@
 
 <script>
     import Vue from 'vue';
-
+    const value = 5;
     Vue.component('singleCase', {
         data: function () {
             return {
@@ -68,11 +68,12 @@
         template: '<div class="corner-case" :class="classList()"><div class="title">nom ici {{id}}</div></div>',
     });
     Vue.component('dices', {
-        template: '<div class="dices">' +
-            '<img src="../../static/die-1.svg" alt="Smiley face" height="42" width="42" class="de1">' +
-            '<img src="../../static/die-1.svg" alt="Smiley face" height="42" width="42" class="de2">' +
-            '<button class="btn btn-light">Lancer</button>' +
-            '</div>'
+        methods: {
+            classList: function(){
+                return '<div class="dices">' + '<img src="../../static/dice' + this.value + '.svg" alt="Dice number: ' + this.value + '" height="42" width class="de1">' + '<img src="../../static/dice' + this.value + '.svg" alt="Dice number: ' + this.value + '" height="42" width class="de2">' + '</div>'
+            }
+        },
+        template: '<div class="dices">' + '<img src="../../static/dice' + value + '.svg" alt="Dice number: ' + value + '" height="42" width class="de1">' + '<img src="../../static/dice' + value + '.svg" alt="Dice number: ' + value + '" height="42" width class="de2">' + '</div>'
     });
     export default {}
 </script>
