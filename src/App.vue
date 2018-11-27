@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="isInGame">
       <router-link to="/" tag="a" class="navbar-brand">Business Tour</router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'App',
         computed: {
@@ -55,6 +54,9 @@
             },
             emailAddress: function () {
                 return this.$store.getters.emailAddress
+            },
+            isInGame: function() {
+                return this.$store.getters.isInGame
             }
         },
         methods: {
