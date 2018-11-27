@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
         userId: null,
         fullName: '',
         emailAddress: '',
-        gameId: null
+        gameId: null,
+        io: null
     },
 
     getters: {
@@ -23,6 +24,9 @@ export const store = new Vuex.Store({
         },
         gameId: state => {
             return state.gameId
+        },
+        io: state => {
+            return state.io
         }
     },
 
@@ -38,6 +42,9 @@ export const store = new Vuex.Store({
         },
         changeGameId (state, payload) {
             state.gameId = payload
+        },
+        changeIo (state, payload) {
+            state.io = payload
         }
     },
 
@@ -53,6 +60,9 @@ export const store = new Vuex.Store({
         },
         changeGameId(context, payload) {
             context.commit('changeGameId', payload)
+        },
+        changeIo(context, payload) {
+            context.commit('changeIo', payload)
         }
     }
 })

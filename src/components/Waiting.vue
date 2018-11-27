@@ -16,13 +16,17 @@ export default {
       playerNb: 1
     }
   },
-  mounted() {
-    if (io.sails) {
-      console.log(io.sails)
-      io.sails.on('refreshPlayer', function(data) {
-      playerNb = data.playerNb
-    })
+  methods: {
+    changePlayerNb() {
+      this.playerNb++;
     }
+  },
+  beforeMount () {
+    let el = this;
+    let io = this.$store.getters.io;
+    io.socket.on('refreshPlayer', function(data) {
+      el.changePlayerNb();
+    })
   }
 }
 </script>

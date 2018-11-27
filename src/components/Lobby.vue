@@ -59,7 +59,8 @@ methods: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        credentials: 'include'
+        credentials: 'include',
+        body: JSON.stringify({gameId: id})
       }).then((response) => {
         return response.json();
       }).then((data) => {
@@ -67,11 +68,11 @@ methods: {
 
         let io = instanciateSocket();
 
-        io.socket.post('/socket/join', {gameId: data.idOfTheCurrentGame}, function(data, jwr) {
+        io.socket.post('/socket/join', {gameId: id}, function(data, jwr) {
           console.log('Server response: ' + jwr + data)
         })
 
-        this.$store.dispatch('changeGameId', data.idOfTheCurrentGame);
+        this.$store.dispatch('changeGameId', id);
         this.$router.push('/waiting')
       })
     }
