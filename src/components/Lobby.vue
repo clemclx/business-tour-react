@@ -113,6 +113,7 @@ export default {
           })
 
           this.$store.dispatch('changeGameId', data.id);
+          this.$store.dispatch('changeisInGame', false)
           this.$router.push('/waiting')
         }).catch((e) => {
           console.log(e);
