@@ -45,7 +45,7 @@
         methods: {
             signup(e) {
                 e.preventDefault();
-                fetch('http://localhost:1337/api/v1/entrance/signup', {
+                fetch('http://192.168.99.100:1337/api/v1/entrance/signup', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

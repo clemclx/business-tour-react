@@ -8,6 +8,7 @@
   </div>
   <div class="cntnr">
     <div><p>{{playerNb}} / 4</p></div>
+    <button class="btn btn-light" v-if="isGameAdmin && playerNb >= 2" @click="launchGame">Lancer la partie</button>
     <button class="btn btn-dark" v-on:click="exitSessions">Quitter la partie</button>
   </div>
 </div>
@@ -20,16 +21,29 @@ export default {
   data: function() {
     return {
       gameId: this.$store.getters.gameId,
-      playerNb: 1
+      playerNb: 1,
+      isGameAdmin: this.$store.getters.isGameAdmin
     }
   },
   methods: {
     changePlayerNb() {
       this.playerNb++;
     },
+    launchGame(e) {
+      e.preventDefault();
+        fetch('http://192.168.99.100:1337/socket/launch', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({gameId: this.gameId})
+        })
+    },
     exitSessions(e){
       e.preventDefault();
-      fetch('http://localhost:1337/lobby', {
+      fetch('http://192.168.99.100:1337/lobby', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -60,6 +74,10 @@ export default {
     let io = this.$store.getters.io;
     io.socket.on('refreshPlayer', function(data) {
       el.changePlayerNb();
+    })
+
+    io.socket.on('launchGame', function(data) {
+      el.$router.push('/play')
     })
   }
 }

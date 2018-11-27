@@ -37,7 +37,7 @@ Vue.component('singleSession', {
 },
 methods: {
   getSessions(){
-      fetch('http://localhost:1337/lobby', {
+      fetch('http://192.168.99.100:1337/lobby', {
         method: 'GET',
         headers : {
           'Accept': 'application/json',
@@ -53,14 +53,15 @@ methods: {
       })
     },
     joinSession(id){
-      fetch('http://localhost:1337/lobby/join', {
+      console.log(id);
+      fetch('http://192.168.99.100:1337/lobby/join', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({gameId: id})
+        body: JSON.stringify({id: id})
       }).then((response) => {
         return response.json();
       }).then((data) => {
@@ -92,7 +93,7 @@ export default {
   methods: {
     createSessions(e){
       e.preventDefault();
-      fetch('http://localhost:1337/lobby/create', {
+      fetch('http://192.168.99.100:1337/lobby/create', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -111,6 +112,10 @@ export default {
           io.socket.post('/socket/test', {gameId: data.id}, function(data, jwr) {
             console.log('Server response: ' + jwr + data)
           })
+
+          if(this.$store.getters.userId == data.createdBy) {
+              this.$store.dispatch('changeIsGameAdmin', true);
+          }
 
           this.$store.dispatch('changeGameId', data.id);
           this.$store.dispatch('changeisInGame', false)

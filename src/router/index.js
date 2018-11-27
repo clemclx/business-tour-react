@@ -86,7 +86,7 @@ export default router
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        fetch('http://localhost:1337/api/v1/account/overview', {
+        fetch('http://192.168.99.100:1337/api/v1/account/overview', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

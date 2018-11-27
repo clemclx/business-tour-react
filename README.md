@@ -1,6 +1,6 @@
-# project
+# btour
 
-> A Vue.js project
+> VueJS for business-tour
 
 ## Build Setup
 

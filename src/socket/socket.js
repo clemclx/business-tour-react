@@ -4,7 +4,7 @@ import {store} from "../store/session"
 
 export default function instanciateSocket() {
     var io = sailsIOClient(socketIOClient);
-    io.sails.url = 'http://localhost:1337';
+    io.sails.url = 'http://192.168.99.100:1337';
 
     store.commit('changeIo', io)
 

@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         emailAddress: '',
         gameId: null,
         io: null,
-        isInGame: true
+        isInGame: true,
+        isGameAdmin: false
     },
 
     getters: {
@@ -31,6 +32,9 @@ export const store = new Vuex.Store({
         },
         isInGame: state =>{
             return state.isInGame
+        },
+        isGameAdmin: state => {
+            return state.isGameAdmin
         }
     },
 
@@ -52,6 +56,9 @@ export const store = new Vuex.Store({
         },
         changeisInGame (state, payload) {
             state.isInGame = payload
+        },
+        changeIsGameAdmin (state, payload) {
+            state.isGameAdmin = payload
         }
     },
 
@@ -73,6 +80,9 @@ export const store = new Vuex.Store({
         },
         changeisInGame(context, payload){
             context.commit('changeisInGame', payload)
+        },
+        changeIsGameAdmin(context, payload) {
+            context.commit('changeIsGameAdmin', payload)
         }
     }
 })
