@@ -1,5 +1,8 @@
 <template>
 <div class="corps">
+  <div class="cntnr">
+    <div><p class="serverNumber">Serveur N°{{gameId}}</p></div>
+  </div>
   <div class="sk-folding-cube">
     <div class="sk-cube1 sk-cube"></div>
     <div class="sk-cube2 sk-cube"></div>
@@ -7,7 +10,7 @@
     <div class="sk-cube3 sk-cube"></div>
   </div>
   <div class="cntnr">
-    <div><p>{{playerNb}} / 4</p></div>
+    <div><p class="playerNumber">{{playerNb}} / 4</p></div>
     <button class="btn btn-dark" v-on:click="exitSessions">Quitter la partie</button>
   </div>
 </div>
@@ -65,7 +68,12 @@ export default {
 }
 </script>
 <style scoped>
-p{
+.serverNumber{
+  margin: 2% auto;
+  font-size: 45px;
+  color: #212121;
+}
+.playerNumber{
   font-size: 90px;
   color: #212121;
 }
@@ -84,7 +92,7 @@ p{
   z-index: 1;
 }
 .sk-folding-cube {
-  margin: 7% auto;
+  margin: 4% auto;
   width: 200px;
   height: 200px;
   position: relative;
@@ -107,8 +115,8 @@ p{
   width: 100%;
   height: 100%;
   background-color: #212121;
-  -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
-          animation: sk-foldCubeAngle 2.4s infinite linear both;
+  -webkit-animation: sk-foldCubeAngle 4.8s infinite linear both;
+          animation: sk-foldCubeAngle 4.8s infinite linear both;
   -webkit-transform-origin: 100% 100%;
       -ms-transform-origin: 100% 100%;
           transform-origin: 100% 100%;
@@ -126,16 +134,16 @@ p{
           transform: scale(1.1) rotateZ(270deg);
 }
 .sk-folding-cube .sk-cube2:before {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
 }
 .sk-folding-cube .sk-cube3:before {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s; 
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s; 
 }
 .sk-folding-cube .sk-cube4:before {
-  -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
+  -webkit-animation-delay: 1.8s;
+          animation-delay: 1.8s;
 }
 @-webkit-keyframes sk-foldCubeAngle {
   0%, 10% {

@@ -98,6 +98,7 @@
 
     html {
         position: relative;
+        overflow-X:hidden;
     }
 
     nav {
