@@ -2,44 +2,44 @@
     <div class="table">          
         <div class="board">
             <dices></dices>
-            <corner-case id="1"></corner-case>
+            <startCase></startCase>
             <div class="col-left">
                 <singleCase></singleCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
-                <singleCase></singleCase>
+                <ileCase></ileCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
             </div>
-            <corner-case id="2"></corner-case>
+            <malusCase></malusCase>
             <div class="row-top">
                 <singleCase></singleCase>
                 <singleCase></singleCase>
+                <chanceCase></chanceCase>
+                <impotCase></impotCase>
                 <singleCase></singleCase>
-                <singleCase></singleCase>
-                <singleCase></singleCase>
-                <singleCase></singleCase>
+                <ileCase></ileCase>
                 <singleCase></singleCase>
             </div>
-            <corner-case id="3"></corner-case>
+            <prisonCase></prisonCase>
             <div class="row-bottom">
                 <singleCase></singleCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
-                <singleCase></singleCase>
-                <singleCase></singleCase>
+                <ileCase></ileCase>
+                <impotCase></impotCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
             </div>
-            <corner-case id="4"></corner-case>
+            <bonusCase></bonusCase>
             <div class="col-right">
                 <singleCase></singleCase>
                 <singleCase></singleCase>
+                <chanceCase></chanceCase>
                 <singleCase></singleCase>
                 <singleCase></singleCase>
-                <singleCase></singleCase>
-                <singleCase></singleCase>
+                <ileCase></ileCase>
                 <singleCase></singleCase>
             </div>
         </div>
@@ -49,6 +49,62 @@
 <script>
     import Vue from 'vue';
     const value = 5;
+    Vue.component('chanceCase', {
+        data: function (){
+            return{
+                name: 'Chance',
+            }
+        },
+        template: '<div class="chanceCase"><div class="title"><img src="../../static/chance.png"></div></div>'
+    }),
+    Vue.component('impotCase', {
+        data: function (){
+            return{
+                name: 'Impot',
+            }
+        },
+        template: '<div class="impotCase"><div class="title"><img src="../../static/impot.png"></div></div>'
+    }),
+    Vue.component('BonusCase', {
+        data: function (){
+            return{
+                name: 'B',
+            }
+        },
+        template: '<div class="bonusCase"><div class="title"><p>{{name}}</p></div></div>'
+    }),
+    Vue.component('ileCase', {
+        data: function (){
+            return{
+                name: 'PF',
+            }
+        },
+        template: '<div class="ileCase"><div class="title"><img src="../../static/ile.png"></div></div>'
+    }),
+    Vue.component('MalusCase', {
+        data: function (){
+            return{
+                name: 'M',
+            }
+        },
+        template: '<div class="malusCase"><div class="title"><p>{{name}}</p></div></div>'
+    }),
+    Vue.component('startCase', {
+        data: function (){
+            return{
+                name: 'Départ',
+            }
+        },
+        template: '<div class="startCase"><div class="title"><p>{{name}}</p></div></div>'
+    }),
+    Vue.component('prisonCase', {
+        data: function (){
+            return{
+                name: 'O',
+            }
+        },
+        template: '<div class="prisonCase"><div class="title"><p>{{name}}</p></div></div>'
+    }),
     Vue.component('singleCase', {
         data: function () {
             return {
@@ -57,15 +113,6 @@
             }
         },
         template: '<div class="single-case"><div class="title">{{name}}</div><div class="price">{{price}}</div></div>'
-    });
-    Vue.component('cornerCase', {
-        props: ['id'],
-        methods: {
-          classList: function() {
-              return 'corner-' + this.id
-          }
-        },
-        template: '<div class="corner-case" :class="classList()"><div class="title">nom ici {{id}}</div></div>',
     });
     Vue.component('dices', {
         methods: {
@@ -156,28 +203,144 @@
         top: 0;
         bottom: 0;
     }
-    .corner-case {
+    .startCase {
         position: absolute;
         background-color: white;
         border: 1px solid grey;
         width: 150px;
         height: 150px;
-    }
-    .corner-1 {
         bottom: 0;
         right: 0;
     }
-    .corner-2 {
+    .startCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .startCase >>> p{
+        margin: 35% auto;
+    }
+    .impotCase {
+        border: 1px solid grey;
+        background-color: white;
+        width: 100px;
+        height: 150px;
+        box-shadow: 0px -5px 7px -3px rgba(0,0,0,0.75);
+    }
+    .impotCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .impotCase >>> img{
+        margin: 20% auto;
+        width: 90px;
+        height: 90px;
+    }
+    .malusCase {
+        position: absolute;
+        background-color: white;
+        border: 1px solid grey;
+        width: 150px;
+        height: 150px;
         bottom: 0;
         left: 0;
     }
-    .corner-3 {
+    .malusCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .malusCase >>> p{
+        margin: 35% auto;
+    }
+    .ileCase {
+        border: 1px solid grey;
+        background-color: white;
+        width: 100px;
+        height: 150px;
+        box-shadow: 0px -5px 7px -3px rgba(0,0,0,0.75);
+    }
+    .ileCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/eau.jpg");
+    }
+    .ileCase >>> img{
+        width: 100px;
+        height: 150px;
+    }
+    .chanceCase {
+        border: 1px solid grey;
+        background-color: white;
+        width: 100px;
+        height: 150px;
+        box-shadow: 0px -5px 7px -3px rgba(0,0,0,0.75);
+    }
+    .chanceCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .chanceCase >>> img{
+        margin: 20% auto;
+        width: 90px;
+        height: 90px;
+    }
+    .prisonCase {
+        position: absolute;
+        background-color: white;
+        border: 1px solid grey;
+        width: 150px;
+        height: 150px;
         top: 0;
         left: 0;
     }
-    .corner-4 {
+    .prisonCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .prisonCase >>> p{
+        margin: 35% auto;
+    }
+    .bonusCase {
+        position: absolute;
+        background-color: white;
+        border: 1px solid grey;
+        width: 150px;
+        height: 150px;
         top: 0;
         right: 0;
+    }
+    .bonusCase >>> .title {
+        padding-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        height: 100%;
+        border-bottom: 1px solid grey;
+        background-image: url("../../static/oilp.jpg");
+    }
+    .bonusCase >>> p{
+        margin: 35% auto;
     }
     .dices {
         position: absolute;
