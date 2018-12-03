@@ -32,7 +32,7 @@ export default {
     },
     launchGame(e) {
       e.preventDefault();
-        fetch('http://192.168.99.100:1337/socket/launch', {
+        fetch('http://localhost:1337/socket/launch', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -44,7 +44,7 @@ export default {
     },
     exitSessions(e){
       e.preventDefault();
-      fetch('http://192.168.99.100:1337/lobby', {
+      fetch('http://localhost:1337/lobby', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -63,7 +63,7 @@ export default {
           // io.socket.post('/socket/test', {gameId: data.id}, function(data, jwr) {
           //   console.log('Server response: ' + jwr + data)
           // })
-          this.$store.dispatch('changeisInGame', true)
+          this.$store.dispatch('changeisInGame', false)
           this.$router.push('/lobby')
         }).catch((e) => {
           console.log(e);
@@ -78,6 +78,7 @@ export default {
     })
 
     io.socket.on('launchGame', function(data) {
+      el.$store.dispatch('changeisInGame', true)
       el.$router.push('/play')
     })
   }

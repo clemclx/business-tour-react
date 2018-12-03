@@ -23,7 +23,7 @@ new Vue({
     components: {App},
     template: '<App/>',
     beforeCreate() {
-            fetch('http://192.168.99.100:1337/api/v1/account/overview', {
+            fetch('http://localhost:1337/api/v1/account/overview', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',

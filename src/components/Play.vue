@@ -1,6 +1,8 @@
 <template>
-    <div class="table">          
+    <div class="table">
+        <turnSection></turnSection>          
         <div class="board">
+            <pion></pion>
             <dices></dices>
             <startCase></startCase>
             <div class="col-left">
@@ -49,6 +51,14 @@
 <script>
     import Vue from 'vue';
     const value = 5;
+    Vue.component('turnSection', {
+        data: function (){
+            return{
+                turn: this.$store.getters.turnOrder,
+            }
+        },
+        template: '<div class="turnSection">Ordre de jeu :<br><div v-for="t in turn">{{t.pseudo}}</div></div>'
+    }),
     Vue.component('chanceCase', {
         data: function (){
             return{
@@ -110,9 +120,32 @@
             return {
                 name: 'test',
                 price: '20K',
+                gameId: this.$store.getters
             }
         },
         template: '<div class="single-case"><div class="title">{{name}}</div><div class="price">{{price}}</div></div>'
+    });
+    Vue.component('pion', {
+        data: function (){
+            return{
+                position: 1
+            }
+        },
+        methods: {
+            changePos: function(newPos) {
+                this.position = newPos;
+            }
+        },
+        beforeMount () {
+            let el = this;
+            let io = this.$store.getters.io;
+
+            io.socket.on('movePion', function(data) {
+                console.log('MOVEPION', data);
+                el.changePos(data.newPos)
+            })
+        },
+        template: '<span class="cercle"></span>'
     });
     Vue.component('dices', {
         methods: {
@@ -365,5 +398,17 @@
     .dices >>> .de2 {
         margin-left: 5px;
         margin-right: 5px;
+    }
+    .cercle {
+        z-index: 100;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        background: green;
+        background-color: green;
+        font-size: 60px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
 </style>

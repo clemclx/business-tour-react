@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
         gameId: null,
         io: null,
         isInGame: true,
-        isGameAdmin: false
+        isGameAdmin: false,
+        turnOrder: null
     },
 
     getters: {
@@ -35,6 +36,9 @@ export const store = new Vuex.Store({
         },
         isGameAdmin: state => {
             return state.isGameAdmin
+        },
+        turnOrder: state => {
+            return state.turnOrder
         }
     },
 
@@ -59,6 +63,9 @@ export const store = new Vuex.Store({
         },
         changeIsGameAdmin (state, payload) {
             state.isGameAdmin = payload
+        },
+        changeTurnOrder (state, payload) {
+            state.turnOrder = payload
         }
     },
 
@@ -83,6 +90,9 @@ export const store = new Vuex.Store({
         },
         changeIsGameAdmin(context, payload) {
             context.commit('changeIsGameAdmin', payload)
+        },
+        changeTurnOrder(context, payload) {
+            context.commit('changeTurnOrder', payload)
         }
     }
 })

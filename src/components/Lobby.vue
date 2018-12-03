@@ -37,7 +37,7 @@ Vue.component('singleSession', {
 },
 methods: {
   getSessions(){
-      fetch('http://192.168.99.100:1337/lobby', {
+      fetch('http://localhost:1337/lobby', {
         method: 'GET',
         headers : {
           'Accept': 'application/json',
@@ -54,7 +54,7 @@ methods: {
     },
     joinSession(id){
       console.log(id);
-      fetch('http://192.168.99.100:1337/lobby/join', {
+      fetch('http://localhost:1337/lobby/join', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -93,7 +93,7 @@ export default {
   methods: {
     createSessions(e){
       e.preventDefault();
-      fetch('http://192.168.99.100:1337/lobby/create', {
+      fetch('http://localhost:1337/lobby/create', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -118,7 +118,7 @@ export default {
           }
 
           this.$store.dispatch('changeGameId', data.id);
-          this.$store.dispatch('changeisInGame', false)
+          this.$store.dispatch('changeisInGame', true)
           this.$router.push('/waiting')
         }).catch((e) => {
           console.log(e);
