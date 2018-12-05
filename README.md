@@ -14,5 +14,4 @@ docker-compose up
 
 Pour le lancement de la partie Vue du projet, il vous faut également la partie **nodeJs** de lancer : https://github.com/clemclx/business-tour-node.git
 
-
 (pour l'installer)
