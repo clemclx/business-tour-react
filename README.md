@@ -5,6 +5,7 @@
 Cette application nécessite d'avoir nodeJs, ainsi que Docker d'installé.
 ```bash
 git clone https://github.com/clemclx/business-tour-react.git
+npm install
 docker-compose up
 ```
  
